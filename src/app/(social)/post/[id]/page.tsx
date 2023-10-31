@@ -7,13 +7,17 @@ import ReactMarkdown from 'react-markdown';
 
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { cn } from '~/lib/utils';
+import type { Publication } from '~/types/lense';
 
 export default function PostPage({
   params: { id },
 }: {
   params: { id: PublicationId };
 }) {
-  const { data: publication, loading } = usePublication({
+  const {
+    data: publication,
+    loading,
+  }: { data: Publication; loading: boolean } = usePublication({
     publicationId: id,
   });
 
@@ -25,6 +29,27 @@ export default function PostPage({
     return notFound();
   }
 
+  const hasMedia = publication.metadata?.media.length;
+  const isMirror = publication.__typename === 'Mirror';
+  const profile: any = isMirror
+    ? publication?.mirrorOf?.profile
+    : publication?.profile;
+  const publicationId = isMirror ? publication?.mirrorOf?.id : id;
+
+  // Stats
+  const commentsCount = isMirror
+    ? publication.mirrorOf.stats.totalAmountOfComments
+    : publication.stats.totalAmountOfComments;
+  const likesCount = isMirror
+    ? publication.mirrorOf.stats.totalUpvotes
+    : publication.stats.totalUpvotes;
+  const collectsCount = isMirror
+    ? publication.mirrorOf.stats.totalAmountOfCollects
+    : publication.stats.totalAmountOfCollects;
+  const mirrorsCount = isMirror
+    ? publication.mirrorOf.stats.totalAmountOfMirrors
+    : publication.stats.totalAmountOfMirrors;
+
   return (
     <article>
       <img
@@ -32,6 +57,7 @@ export default function PostPage({
           'h-auto max-w-full',
           'rounded-2xl object-cover sm:max-w-[500px]',
         )}
+        alt=""
         src={
           publication.__typename === 'Post'
             ? publication.metadata?.media[0]?.original.url
@@ -54,6 +80,16 @@ export default function PostPage({
           </AvatarFallback>
         </Avatar>
       )}
+
+      <div className="flex gap-8 border-y-2 border-border py-2">
+        <div>{commentsCount} Comments</div>
+        <div>{likesCount} Likes</div>
+        {publication.collectModule.__typename !==
+        'RevertCollectModuleSettings' ? (
+          <div>{collectsCount} Collects</div>
+        ) : null}
+        <div>{mirrorsCount} Mirrors</div>
+      </div>
     </article>
   );
 }
