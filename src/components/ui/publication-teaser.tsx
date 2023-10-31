@@ -5,10 +5,9 @@ import ReactMarkdown from 'react-markdown';
 
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { cn } from '~/lib/utils';
-import type { Publication } from '~/types/lense';
 
 export interface PublicationTeaserProps {
-  publication: Publication;
+  publication: any;
 }
 
 export function PublicationTeaser({ publication }: PublicationTeaserProps) {

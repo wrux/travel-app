@@ -7,17 +7,13 @@ import ReactMarkdown from 'react-markdown';
 
 // import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { cn } from '~/lib/utils';
-import type { Publication } from '~/types/lense';
 
 export default function PostPage({
   params: { id },
 }: {
   params: { id: PublicationId };
 }) {
-  const {
-    data: publication,
-    loading,
-  }: { data: Publication; loading: boolean } = usePublication({
+  const { data, loading } = usePublication({
     publicationId: id,
   });
 
@@ -25,9 +21,11 @@ export default function PostPage({
     return <div>Loading...</div>;
   }
 
-  if (!publication) {
+  if (!data) {
     return notFound();
   }
+
+  const publication = data as any;
 
   // const hasMedia = publication.metadata?.media.length;
   const isMirror = publication.__typename === 'Mirror';

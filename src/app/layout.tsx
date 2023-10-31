@@ -13,7 +13,7 @@ import './globals.css';
 import LensProvider from './lens-provider';
 
 import { ModeToggle } from '~/components/dropdown';
-import { ThemeProvider } from '~/components/theme-provider';
+import { ThemeProvider } from '~/components/providers/theme-provider';
 import { Button } from '~/components/ui/button';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -81,10 +81,14 @@ function Nav() {
   );
 }
 
-export default function RootLayout({ children, ...props }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <LensProvider>
-      <AppWithProviders {...props}>
+      <AppWithProviders>
         <WalletProvider>{children}</WalletProvider>
       </AppWithProviders>
     </LensProvider>

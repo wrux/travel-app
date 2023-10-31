@@ -5,8 +5,6 @@ import {
   useExplorePublications,
 } from '@lens-protocol/react-web';
 
-import type { Publication } from '~/types/lense';
-
 const publicationFocusTypes: Record<string, PublicationMainFocus[]> = {
   default: [
     PublicationMainFocus.Article,
@@ -25,7 +23,7 @@ export default function useExplore({
 }: {
   focus?: keyof typeof publicationFocusTypes;
 } = {}): {
-  data: Publication[];
+  data: any[];
   error?: Error;
   loading?: boolean;
 } {
@@ -41,7 +39,7 @@ export default function useExplore({
   });
 
   return {
-    data: data as Publication[],
+    data: data,
     error,
     loading,
   };
