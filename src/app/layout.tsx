@@ -2,8 +2,6 @@
 
 import { disconnect } from '@wagmi/core';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
-// import { GeistMono, GeistSans } from 'geist/font';
-import { GeistSans } from 'geist/font';
 import { ChevronRight, Droplets, LogOut } from 'lucide-react';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
