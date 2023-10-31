@@ -2,7 +2,7 @@
 
 import { Image, Star, Text, Video } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '~/lib/utils';
 
@@ -29,7 +29,11 @@ const sections = [
   },
 ];
 
-export default function ExploreLayout({ children, ...props }) {
+export default function ExploreLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   // Extract section from path name `/explore/${section}`
   const activeSection = pathname.split('/')[2] || 'overview';

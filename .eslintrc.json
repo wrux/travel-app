@@ -5,6 +5,7 @@
   "root": true,
   "rules": {
     "@typescript-eslint/consistent-type-imports": "error",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

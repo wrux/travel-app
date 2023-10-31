@@ -5,7 +5,7 @@ import { usePublication } from '@lens-protocol/react-web';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+// import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { cn } from '~/lib/utils';
 import type { Publication } from '~/types/lense';
 
@@ -29,12 +29,12 @@ export default function PostPage({
     return notFound();
   }
 
-  const hasMedia = publication.metadata?.media.length;
+  // const hasMedia = publication.metadata?.media.length;
   const isMirror = publication.__typename === 'Mirror';
-  const profile: any = isMirror
-    ? publication?.mirrorOf?.profile
-    : publication?.profile;
-  const publicationId = isMirror ? publication?.mirrorOf?.id : id;
+  // const profile: any = isMirror
+  //   ? publication?.mirrorOf?.profile
+  //   : publication?.profile;
+  // const publicationId = isMirror ? publication?.mirrorOf?.id : id;
 
   // Stats
   const commentsCount = isMirror
@@ -72,14 +72,14 @@ export default function PostPage({
         )}
       </ReactMarkdown>
 
-      {publication.profile?.picture && (
+      {/* {publication.profile?.picture && (
         <Avatar>
           <AvatarImage src={publication.profile?.picture?.original?.url} />
           <AvatarFallback>
             {publication.profile.handle.slice(0, 2)}
           </AvatarFallback>
         </Avatar>
-      )}
+      )} */}
 
       <div className="flex gap-8 border-y-2 border-border py-2">
         <div>{commentsCount} Comments</div>
