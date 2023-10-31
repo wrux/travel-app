@@ -1,15 +1,18 @@
-"use client";
-import "./globals.css";
-import { polygonMumbai, polygon } from "wagmi/chains";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { LensProvider, LensConfig, production } from "@lens-protocol/react-web";
-import { bindings as wagmiBindings } from "@lens-protocol/wagmi";
+'use client';
+
+import type { LensConfig } from '@lens-protocol/react-web';
+import { LensProvider, production } from '@lens-protocol/react-web';
+import { bindings as wagmiBindings } from '@lens-protocol/wagmi';
+import { WagmiConfig, configureChains, createConfig } from 'wagmi';
+import { polygon, polygonMumbai } from 'wagmi/chains';
+import { InjectedConnector } from 'wagmi/connectors/injected';
+import { publicProvider } from 'wagmi/providers/public';
+
+import './globals.css';
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai, polygon],
-  [publicProvider()]
+  [publicProvider()],
 );
 
 const config = createConfig({
@@ -30,16 +33,10 @@ const lensConfig: LensConfig = {
   environment: production,
 };
 
-export default function Provider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiConfig config={config}>
-      <LensProvider config={lensConfig}>
-        {children}
-      </LensProvider>
+      <LensProvider config={lensConfig}>{children}</LensProvider>
     </WagmiConfig>
   );
 }
