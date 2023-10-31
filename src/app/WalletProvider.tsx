@@ -16,6 +16,6 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
 createWeb3Modal({ wagmiConfig, projectId, chains });
 
-export function WalletProvider({ children }) {
+export function WalletProvider({ children }: { children: React.ReactNode }) {
   return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;
 }
