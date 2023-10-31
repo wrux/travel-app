@@ -2,6 +2,8 @@
 
 import { disconnect } from '@wagmi/core';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
+// import { GeistMono, GeistSans } from 'geist/font';
+import { GeistSans } from 'geist/font';
 import { ChevronRight, Droplets, LogOut } from 'lucide-react';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
@@ -41,7 +43,7 @@ function Nav() {
       <div className="p flex flex-1 items-center px-8 py-3">
         <Link href="/" className="mr-5 flex items-center">
           <Droplets className="opacity-85" size={19} />
-          <p className={`ml-2 mr-4 text-lg font-semibold`}>lenscn</p>
+          <p className={`ml-2 mr-4 text-lg font-semibold`}>Wanderlust</p>
         </Link>
         <Link
           href="/"
